@@ -30,7 +30,7 @@ def test_full_langgraph_routing():
     }
 
     print("==================================================")
-    print("   ThreadTheory Phase 7 - LangGraph Graph Test    ")
+    print("   Moda Phase 7 - LangGraph Graph Test    ")
     print("==================================================\n")
     print(f"Starting Graph Execution for Query: '{user_prompt}'\n")
 

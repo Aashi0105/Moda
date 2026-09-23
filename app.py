@@ -1,4 +1,4 @@
-"""Streamlit Web Interface module for ThreadTheory Multi-Agent Stylist (Phase 8).
+"""Streamlit Web Interface module for Moda Multi-Agent Stylist (Phase 8).
 
 Renders an interactive UI displaying:
 1. User prompt input
@@ -21,12 +21,12 @@ from graph import app_graph, AgentState
 
 # Configure page metadata
 st.set_page_config(
-    page_title="ThreadTheory Multi-Agent Stylist",
+    page_title="Moda Multi-Agent Stylist",
     page_icon="👔",
     layout="wide"
 )
 
-st.title("👔 ThreadTheory Multi-Agent Stylist")
+st.title("👔 Moda Multi-Agent Stylist")
 st.caption("Powered by LangGraph, Gemini & Open-Meteo")
 
 st.markdown("""

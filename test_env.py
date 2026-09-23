@@ -86,7 +86,7 @@ def check_sqlite_db():
 
 if __name__ == "__main__":
     print("==================================================")
-    print("  ThreadTheory Phase 1 - Environment & Tech Stack Verification")
+    print("  Moda Phase 1 - Environment & Tech Stack Verification")
     print("==================================================\n")
     
     step1 = check_imports()

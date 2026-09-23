@@ -1,7 +1,7 @@
 {
-  "name": "threadtheory-frontend",
+  "name": "moda",
   "version": "1.0.0",
-  "description": "Frontend prototype for ThreadTheory",
+  "description": "Frontend prototype for Moda",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

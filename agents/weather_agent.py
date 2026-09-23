@@ -1,4 +1,4 @@
-"""Weather Agent module for ThreadTheory Multi-Agent Stylist.
+"""Weather Agent module for Moda Multi-Agent Stylist.
 
 Wraps the Weather Tool into a LangChain tool and exposes a dedicated Weather Agent
 powered by Gemini.

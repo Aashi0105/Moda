@@ -1,4 +1,4 @@
-"""Wardrobe tool module for ThreadTheory Multi-Agent Stylist.
+"""Wardrobe tool module for Moda Multi-Agent Stylist.
 
 Queries the SQLite database ('wardrobe.db') to fetch available clothing items,
 filtering by category, formality, and temperature range.

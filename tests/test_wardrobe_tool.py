@@ -61,7 +61,7 @@ def test_filter_by_formality():
 
 if __name__ == "__main__":
     print("==================================================")
-    print("       ThreadTheory Phase 3 - Wardrobe Tool Test   ")
+    print("       Moda Phase 3 - Wardrobe Tool Test   ")
     print("==================================================\n")
 
     test_get_all_wardrobe_items()

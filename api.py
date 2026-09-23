@@ -1,4 +1,4 @@
-"""Python HTTP API Backend for ThreadTheory Multi-Agent Stylist.
+"""Python HTTP API Backend for Moda Multi-Agent Stylist.
 
 Exposes a REST API endpoint 'POST /recommend' that invokes the LangGraph Supervisor graph
 and returns structured JSON recommendations to the Node.js / Express website server.
@@ -135,7 +135,7 @@ class LangGraphAPIHandler(BaseHTTPRequestHandler):
             self.end_headers()
             response = {
                 "status": "ok",
-                "service": "ThreadTheory LangGraph Multi-Agent REST API",
+                "service": "Moda LangGraph Multi-Agent REST API",
                 "usage": "Send an HTTP POST request to /recommend with payload {\"prompt\": \"your styling request\"}"
             }
             self.wfile.write(json.dumps(response, indent=2).encode("utf-8"))
@@ -221,7 +221,7 @@ def run_api_server(port: int = 5000):
     """Starts the HTTP API server."""
     server_address = ("", port)
     httpd = HTTPServer(server_address, LangGraphAPIHandler)
-    print(f"🚀 ThreadTheory LangGraph API server running at http://localhost:{port}/recommend")
+    print(f"🚀 Moda LangGraph API server running at http://localhost:{port}/recommend")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

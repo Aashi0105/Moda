@@ -1,4 +1,4 @@
-"""Weather tool module for ThreadTheory Multi-Agent Stylist.
+"""Weather tool module for Moda Multi-Agent Stylist.
 
 Integrates with Open-Meteo Geocoding and Forecast APIs to fetch real-time
 weather data without requiring an API key.
@@ -34,7 +34,7 @@ WMO_CODE_MAP = {
     99: "Thunderstorm with Heavy Hail",
 }
 
-DEFAULT_HEADERS = {"User-Agent": "ThreadTheoryStylist/1.0 (Python/Requests)"}
+DEFAULT_HEADERS = {"User-Agent": "ModaStylist/1.0 (Python/Requests)"}
 
 
 def _fetch_with_retry(url: str, max_retries: int = 3, timeout: int = 15) -> requests.Response:

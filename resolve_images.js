@@ -1,6 +1,6 @@
 /**
  * resolve_images.js
- * Pre-resolves all 75 curated aesthetics cards in ThreadTheory lookbook using Pexels API
+ * Pre-resolves all 75 curated aesthetics cards in Moda lookbook using Pexels API
  * and caches them locally in pexels_search_cache.json.
  */
 
@@ -34,7 +34,7 @@ const { resolveCardImage } = require('./pexels_helper.js');
 
 async function resolveAllAesthetics() {
     console.log("======================================================================");
-    console.log("ThreadTheory: Running Pre-Resolution script for all 150 lookbook cards...");
+    console.log("Moda: Running Pre-Resolution script for all 150 lookbook cards...");
     console.log("======================================================================");
     
     // Filter to all cards in the dataset

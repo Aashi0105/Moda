@@ -3733,7 +3733,7 @@ app.get('/api/style-dna', (req, res) => {
     const userHistory = history.filter(h => (h.email || "").toLowerCase() === userEmail)
                          .sort((a, b) => a.timestamp.localeCompare(b.timestamp));
                          
-    let trendText = "Style Evolution data is just getting started. Continue using ThreadTheory to unlock trend tracking over time.";
+    let trendText = "Style Evolution data is just getting started. Continue using Moda to unlock trend tracking over time.";
     if (userHistory.length >= 2) {
         const firstSnapshot = userHistory[0];
         const latestSnapshot = userHistory[userHistory.length - 1];
@@ -4055,6 +4055,6 @@ app.all(['/recommend', '/api/recommend', '/api/recommendations'], async (req, re
 
 // Start Server
 app.listen(PORT, () => {
-    console.log(`ThreadTheory backend running on http://localhost:${PORT}`);
+    console.log(`Moda backend running on http://localhost:${PORT}`);
 });
 

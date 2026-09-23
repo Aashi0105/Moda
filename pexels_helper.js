@@ -328,7 +328,7 @@ function fetchFromPexels(query) {
             headers: {
                 'Authorization': apiKey,
                 'Accept': 'application/json',
-                'User-Agent': 'ThreadTheoryCuratedLookbook/1.0'
+                'User-Agent': 'ModaCuratedLookbook/1.0'
             }
         }, res => {
             if (res.statusCode !== 200) {

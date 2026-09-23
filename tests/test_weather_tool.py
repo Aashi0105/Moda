@@ -58,7 +58,7 @@ def test_weather_invalid_city():
 
 if __name__ == "__main__":
     print("==================================================")
-    print("        ThreadTheory Phase 2 - Weather Tool Test   ")
+    print("        Moda Phase 2 - Weather Tool Test   ")
     print("==================================================\n")
 
     test_weather_valid_city()

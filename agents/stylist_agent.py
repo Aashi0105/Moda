@@ -1,4 +1,4 @@
-"""Stylist Agent module for ThreadTheory Multi-Agent Stylist.
+"""Stylist Agent module for Moda Multi-Agent Stylist.
 
 Consumes the outputs of the Weather Agent and Wardrobe Agent to reason about styling,
 weather appropriateness, color harmony, and formality alignment.
@@ -55,7 +55,7 @@ def run_stylist_agent(
             - agent_response: str (structured Markdown outfit recommendation and rationale)
     """
     stylist_system_prompt = (
-        "You are ThreadTheory's Senior Personal AI Stylist.\n"
+        "You are Moda's Senior Personal AI Stylist.\n"
         "Your task is to analyze: (1) User Request, (2) Real-Time Weather Data, and (3) Available Wardrobe Items.\n"
         "Compose a cohesive, stylish, and weather-appropriate outfit.\n\n"
         "STRICT CONSTRAINTS:\n"

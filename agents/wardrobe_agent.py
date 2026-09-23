@@ -1,4 +1,4 @@
-"""Wardrobe Agent module for ThreadTheory Multi-Agent Stylist.
+"""Wardrobe Agent module for Moda Multi-Agent Stylist.
 
 Wraps the Wardrobe Tool into a LangChain tool and exposes a dedicated Wardrobe Agent
 powered by Gemini.

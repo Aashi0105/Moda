@@ -1,4 +1,4 @@
-"""LangGraph Multi-Agent Orchestrator module for ThreadTheory Multi-Agent Stylist.
+"""LangGraph Multi-Agent Orchestrator module for Moda Multi-Agent Stylist.
 
 Defines the shared AgentState and constructs the LangGraph StateGraph with Supervisor routing:
 Supervisor -> Weather Agent -> Supervisor -> Wardrobe Agent -> Supervisor -> Stylist Agent -> FINISH.

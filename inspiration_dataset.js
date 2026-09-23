@@ -1,5 +1,5 @@
 /**
- * ThreadTheory Inspiration Dataset
+ * Moda Inspiration Dataset
  * ARCHITECTURE: Each board has its OWN dedicated set of cards.
  * Cards are NOT shared across boards. Each board is a unique Pinterest board.
  *

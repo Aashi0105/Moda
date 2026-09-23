@@ -65,7 +65,7 @@ def test_wardrobe_agent_empty_result():
 
 if __name__ == "__main__":
     print("==================================================")
-    print("      ThreadTheory Phase 5 - Wardrobe Agent Test  ")
+    print("      Moda Phase 5 - Wardrobe Agent Test  ")
     print("==================================================\n")
 
     test_wardrobe_agent_general()

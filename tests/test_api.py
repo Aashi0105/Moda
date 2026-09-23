@@ -69,7 +69,7 @@ def test_api_recommend_endpoint():
     time.sleep(0.5)
 
     print("==================================================")
-    print("      ThreadTheory API - LangGraph REST Test       ")
+    print("      Moda API - LangGraph REST Test       ")
     print("==================================================\n")
 
     url = f"http://localhost:{port}/recommend"

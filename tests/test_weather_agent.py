@@ -40,7 +40,7 @@ def test_weather_agent():
 
 if __name__ == "__main__":
     print("==================================================")
-    print("       ThreadTheory Phase 4 - Weather Agent Test   ")
+    print("       Moda Phase 4 - Weather Agent Test   ")
     print("==================================================\n")
 
     test_weather_agent()

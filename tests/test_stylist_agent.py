@@ -50,7 +50,7 @@ def test_stylist_agent_reasoning():
 
 if __name__ == "__main__":
     print("==================================================")
-    print("       ThreadTheory Phase 6 - Stylist Agent Test   ")
+    print("       Moda Phase 6 - Stylist Agent Test   ")
     print("==================================================\n")
 
     test_stylist_agent_reasoning()

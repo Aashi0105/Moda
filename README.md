@@ -1,8 +1,8 @@
-# ThreadTheory
+# Moda
 
 > An AI-powered digital wardrobe and multi-agent styling platform that curates cohesive, weather-appropriate outfits strictly from clothes you actually own.
 
-ThreadTheory addresses the everyday problem of "a closet full of clothes, but nothing to wear." While standard LLM chatbots often invent or hallucinate non-existent garments, ThreadTheory grounds every suggestion in a personal digital wardrobe database. 
+Moda addresses the everyday problem of "a closet full of clothes, but nothing to wear." While standard LLM chatbots often invent or hallucinate non-existent garments, Moda grounds every suggestion in a personal digital wardrobe database. 
 
 The core intelligence is powered by a **LangGraph multi-agent architecture** running on Python with **Google Gemini** and **Open-Meteo REST APIs**, bridged seamlessly to a responsive **Node.js/Express** editorial web application.
 
@@ -26,7 +26,7 @@ The core intelligence is powered by a **LangGraph multi-agent architecture** run
 
 ## 🤖 Multi-Agent AI Architecture
 
-ThreadTheory coordinates reasoning across three specialized worker agents using a centralized **Supervisor Agent** built with **LangGraph**:
+Moda coordinates reasoning across three specialized worker agents using a centralized **Supervisor Agent** built with **LangGraph**:
 
 ```mermaid
 flowchart TD
@@ -127,7 +127,7 @@ flowchart LR
 ## 📁 Project Structure
 
 ```text
-ThreadTheory/
+Moda/
 ├── agents/                     # LangGraph Agent implementations
 │   ├── stylist_agent.py        # Gemini reasoning agent for outfit synthesis
 │   ├── wardrobe_agent.py       # Inventory filtering agent
@@ -168,8 +168,8 @@ ThreadTheory/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Aashi0105/ThreadTheory.git
-cd ThreadTheory
+git clone https://github.com/Aashi0105/Moda.git
+cd Moda
 ```
 
 ### 2. Python Environment Setup
