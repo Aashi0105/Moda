@@ -1,0 +1,662 @@
+[
+  {
+    "id": 1,
+    "product_id": "MODA-0001",
+    "name": "Navy Blue Wool Trench Coat",
+    "image": "/uploads/image-1781693192020-605948074.jpg",
+    "category": "Outerwear",
+    "subcategory": "Coat",
+    "color": "Navy",
+    "pattern": "Solid",
+    "formality": "Formal",
+    "season": [
+      "Winter"
+    ],
+    "price": 5499,
+    "available_sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock_quantity": 4,
+    "temp_min_c": -5.0,
+    "temp_max_c": 15.0
+  },
+  {
+    "id": 2,
+    "product_id": "MODA-0002",
+    "name": "Black Heavy Puffer Jacket",
+    "image": "/uploads/image-1781760502836-295940226.png",
+    "category": "Outerwear",
+    "subcategory": "Jacket",
+    "color": "Black",
+    "pattern": "Solid",
+    "formality": "Casual",
+    "season": [
+      "Winter"
+    ],
+    "price": 4299,
+    "available_sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock_quantity": 6,
+    "temp_min_c": -10.0,
+    "temp_max_c": 10.0
+  },
+  {
+    "id": 3,
+    "product_id": "MODA-0003",
+    "name": "Beige Lightweight Windbreaker",
+    "image": "/uploads/image-1781847214651-53618591_original.png",
+    "category": "Outerwear",
+    "subcategory": "Jacket",
+    "color": "Beige",
+    "pattern": "Solid",
+    "formality": "Casual",
+    "season": [
+      "Spring",
+      "All Season"
+    ],
+    "price": 2199,
+    "available_sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock_quantity": 8,
+    "temp_min_c": 10.0,
+    "temp_max_c": 22.0
+  },
+  {
+    "id": 4,
+    "product_id": "MODA-0004",
+    "name": "Dark Grey Tailored Suit Jacket",
+    "image": "/uploads/image-1783182707205-392757678_original.png",
+    "category": "Outerwear",
+    "subcategory": "Blazer",
+    "color": "Grey",
+    "pattern": "Solid",
+    "formality": "Formal",
+    "season": [
+      "All Season"
+    ],
+    "price": 4999,
+    "available_sizes": [
+      "38R",
+      "40R",
+      "42R"
+    ],
+    "stock_quantity": 3,
+    "temp_min_c": 12.0,
+    "temp_max_c": 24.0
+  },
+  {
+    "id": 5,
+    "product_id": "MODA-0005",
+    "name": "White Oxford Cotton Shirt",
+    "image": "/uploads/image-1781760331015-264270365.jpg",
+    "category": "Top",
+    "subcategory": "Shirt",
+    "color": "White",
+    "pattern": "Solid",
+    "formality": "Smart Casual",
+    "season": [
+      "All Season"
+    ],
+    "price": 1599,
+    "available_sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock_quantity": 10,
+    "temp_min_c": 10.0,
+    "temp_max_c": 38.0
+  },
+  {
+    "id": 6,
+    "product_id": "MODA-0006",
+    "name": "Charcoal Cashmere Sweater",
+    "image": "/uploads/image-1781760541225-32115718.png",
+    "category": "Top",
+    "subcategory": "Sweater",
+    "color": "Charcoal",
+    "pattern": "Solid",
+    "formality": "Smart Casual",
+    "season": [
+      "Winter"
+    ],
+    "price": 2899,
+    "available_sizes": [
+      "M",
+      "L"
+    ],
+    "stock_quantity": 5,
+    "temp_min_c": 0.0,
+    "temp_max_c": 16.0
+  },
+  {
+    "id": 7,
+    "product_id": "MODA-0007",
+    "name": "Graphic Vintage Tee",
+    "image": "/uploads/image-1781760401184-162521915.png",
+    "category": "Top",
+    "subcategory": "T-shirt",
+    "color": "Black",
+    "pattern": "Graphic",
+    "formality": "Casual",
+    "season": [
+      "Summer",
+      "All Season"
+    ],
+    "price": 999,
+    "available_sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock_quantity": 9,
+    "temp_min_c": 18.0,
+    "temp_max_c": 35.0
+  },
+  {
+    "id": 8,
+    "product_id": "MODA-0008",
+    "name": "Linen Short Sleeve Shirt",
+    "image": "/uploads/image-1781679479856-363546866.jpeg",
+    "category": "Top",
+    "subcategory": "Shirt",
+    "color": "Sky Blue",
+    "pattern": "Solid",
+    "formality": "Casual",
+    "season": [
+      "Summer"
+    ],
+    "price": 1399,
+    "available_sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock_quantity": 6,
+    "temp_min_c": 22.0,
+    "temp_max_c": 38.0
+  },
+  {
+    "id": 9,
+    "product_id": "MODA-0009",
+    "name": "Dark Wash Slim Jeans",
+    "image": "/uploads/blue_jeans.png",
+    "category": "Bottom",
+    "subcategory": "Jeans",
+    "color": "Dark Denim",
+    "pattern": "Solid",
+    "formality": "Casual",
+    "season": [
+      "All Season"
+    ],
+    "price": 2299,
+    "available_sizes": [
+      "30",
+      "32",
+      "34",
+      "36"
+    ],
+    "stock_quantity": 11,
+    "temp_min_c": 5.0,
+    "temp_max_c": 28.0
+  },
+  {
+    "id": 10,
+    "product_id": "MODA-0010",
+    "name": "Beige Chino Pants",
+    "image": "/uploads/image-1783318731393-226207526_original.png",
+    "category": "Bottom",
+    "subcategory": "Chinos",
+    "color": "Beige",
+    "pattern": "Solid",
+    "formality": "Smart Casual",
+    "season": [
+      "All Season"
+    ],
+    "price": 1899,
+    "available_sizes": [
+      "30",
+      "32",
+      "34",
+      "36"
+    ],
+    "stock_quantity": 8,
+    "temp_min_c": 10.0,
+    "temp_max_c": 38.0
+  },
+  {
+    "id": 11,
+    "product_id": "MODA-0011",
+    "name": "Black Tailored Dress Trousers",
+    "image": "/uploads/image-1784919355031-852989412_original.png",
+    "category": "Bottom",
+    "subcategory": "Trousers",
+    "color": "Black",
+    "pattern": "Solid",
+    "formality": "Formal",
+    "season": [
+      "All Season"
+    ],
+    "price": 2499,
+    "available_sizes": [
+      "30",
+      "32",
+      "34",
+      "36"
+    ],
+    "stock_quantity": 4,
+    "temp_min_c": 10.0,
+    "temp_max_c": 26.0
+  },
+  {
+    "id": 12,
+    "product_id": "MODA-0012",
+    "name": "Linen Blend Shorts",
+    "image": "/uploads/image-1783182861523-304733898_original.png",
+    "category": "Bottom",
+    "subcategory": "Shorts",
+    "color": "Khaki",
+    "pattern": "Solid",
+    "formality": "Casual",
+    "season": [
+      "Summer"
+    ],
+    "price": 1199,
+    "available_sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock_quantity": 7,
+    "temp_min_c": 20.0,
+    "temp_max_c": 38.0
+  },
+  {
+    "id": 13,
+    "product_id": "MODA-0013",
+    "name": "Brown Leather Chelsea Boots",
+    "image": "/uploads/image-1781845195864-407022617_original.jpg",
+    "category": "Shoes",
+    "subcategory": "Boots",
+    "color": "Brown",
+    "pattern": "Solid",
+    "formality": "Smart Casual",
+    "season": [
+      "Winter",
+      "All Season"
+    ],
+    "price": 3499,
+    "available_sizes": [
+      "8",
+      "9",
+      "10"
+    ],
+    "stock_quantity": 3,
+    "temp_min_c": -5.0,
+    "temp_max_c": 20.0
+  },
+  {
+    "id": 14,
+    "product_id": "MODA-0014",
+    "name": "Minimalist White Leather Sneakers",
+    "image": "/uploads/beige_sneakers.png",
+    "category": "Shoes",
+    "subcategory": "Sneakers",
+    "color": "White",
+    "pattern": "Solid",
+    "formality": "Casual",
+    "season": [
+      "All Season"
+    ],
+    "price": 2699,
+    "available_sizes": [
+      "7",
+      "8",
+      "9",
+      "10",
+      "11"
+    ],
+    "stock_quantity": 14,
+    "temp_min_c": 5.0,
+    "temp_max_c": 38.0
+  },
+  {
+    "id": 15,
+    "product_id": "MODA-0015",
+    "name": "Black Oxfords Leather Shoes",
+    "image": "/uploads/image-1783182762512-113271116_original.png",
+    "category": "Shoes",
+    "subcategory": "Loafers",
+    "color": "Black",
+    "pattern": "Solid",
+    "formality": "Formal",
+    "season": [
+      "All Season"
+    ],
+    "price": 3799,
+    "available_sizes": [
+      "8",
+      "9",
+      "10"
+    ],
+    "stock_quantity": 5,
+    "temp_min_c": 10.0,
+    "temp_max_c": 30.0
+  },
+  {
+    "id": 16,
+    "product_id": "MODA-0016",
+    "name": "Wool Ribbed Scarf",
+    "image": "/uploads/image-1789674411935-785912690_original.png",
+    "category": "Accessory",
+    "subcategory": "Scarf",
+    "color": "Grey",
+    "pattern": "Solid",
+    "formality": "Casual",
+    "season": [
+      "Winter"
+    ],
+    "price": 799,
+    "available_sizes": [
+      "One Size"
+    ],
+    "stock_quantity": 8,
+    "temp_min_c": -10.0,
+    "temp_max_c": 12.0
+  },
+  {
+    "id": 17,
+    "product_id": "MODA-0017",
+    "name": "UV Protection Sunglasses",
+    "image": "/uploads/sunglasses.png",
+    "category": "Accessory",
+    "subcategory": "Sunglasses",
+    "color": "Black",
+    "pattern": "Solid",
+    "formality": "Casual",
+    "season": [
+      "Summer",
+      "All Season"
+    ],
+    "price": 999,
+    "available_sizes": [
+      "One Size"
+    ],
+    "stock_quantity": 12,
+    "temp_min_c": 15.0,
+    "temp_max_c": 40.0
+  },
+  {
+    "id": 18,
+    "product_id": "MODA-0018",
+    "name": "Blue Striped Shirt",
+    "image": "/uploads/blue_shirt.jpeg",
+    "category": "Top",
+    "subcategory": "Shirt",
+    "color": "Blue",
+    "pattern": "Striped",
+    "formality": "Smart Casual",
+    "season": [
+      "Summer",
+      "All Season"
+    ],
+    "price": 1299,
+    "available_sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock_quantity": 7,
+    "temp_min_c": 18.0,
+    "temp_max_c": 38.0
+  },
+  {
+    "id": 19,
+    "product_id": "MODA-0019",
+    "name": "Classic Blue Slim Jeans",
+    "image": "/uploads/blue_jeans.png",
+    "category": "Bottom",
+    "subcategory": "Jeans",
+    "color": "Blue",
+    "pattern": "Solid",
+    "formality": "Casual",
+    "season": [
+      "All Season"
+    ],
+    "price": 1999,
+    "available_sizes": [
+      "30",
+      "32",
+      "34",
+      "36"
+    ],
+    "stock_quantity": 12,
+    "temp_min_c": 10.0,
+    "temp_max_c": 38.0
+  },
+  {
+    "id": 20,
+    "product_id": "MODA-0020",
+    "name": "Beige Canvas Low Sneakers",
+    "image": "/uploads/beige_sneakers.png",
+    "category": "Shoes",
+    "subcategory": "Sneakers",
+    "color": "Beige",
+    "pattern": "Solid",
+    "formality": "Casual",
+    "season": [
+      "All Season"
+    ],
+    "price": 2499,
+    "available_sizes": [
+      "7",
+      "8",
+      "9",
+      "10",
+      "11"
+    ],
+    "stock_quantity": 5,
+    "temp_min_c": 5.0,
+    "temp_max_c": 35.0
+  },
+  {
+    "id": 21,
+    "product_id": "MODA-0021",
+    "name": "Multicolor Striped Casual Shirt",
+    "image": "/uploads/striped_shirt.png",
+    "category": "Top",
+    "subcategory": "Shirt",
+    "color": "Multicolor",
+    "pattern": "Striped",
+    "formality": "Smart Casual",
+    "season": [
+      "Summer",
+      "All Season"
+    ],
+    "price": 1499,
+    "available_sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock_quantity": 4,
+    "temp_min_c": 20.0,
+    "temp_max_c": 36.0
+  },
+  {
+    "id": 22,
+    "product_id": "MODA-0022",
+    "name": "Blue Pointed Stiletto Heels",
+    "image": "/uploads/blue_heels.png",
+    "category": "Shoes",
+    "subcategory": "Heels",
+    "color": "Blue",
+    "pattern": "Solid",
+    "formality": "Smart Casual",
+    "season": [
+      "Summer",
+      "All Season"
+    ],
+    "price": 2999,
+    "available_sizes": [
+      "6",
+      "7",
+      "8"
+    ],
+    "stock_quantity": 3,
+    "temp_min_c": 15.0,
+    "temp_max_c": 35.0
+  },
+  {
+    "id": 23,
+    "product_id": "MODA-0023",
+    "name": "Red Tailored Mini Dress",
+    "image": "/uploads/red_dress.png",
+    "category": "Dress",
+    "subcategory": "Mini Dress",
+    "color": "Red",
+    "pattern": "Solid",
+    "formality": "Smart Casual",
+    "season": [
+      "Summer",
+      "All Season"
+    ],
+    "price": 2799,
+    "available_sizes": [
+      "XS",
+      "S",
+      "M"
+    ],
+    "stock_quantity": 2,
+    "temp_min_c": 18.0,
+    "temp_max_c": 32.0
+  },
+  {
+    "id": 24,
+    "product_id": "MODA-0024",
+    "name": "Crimson Silk Evening Maxi Dress",
+    "image": "/uploads/red_maxi_dress.jpg",
+    "category": "Dress",
+    "subcategory": "Maxi Dress",
+    "color": "Red",
+    "pattern": "Solid",
+    "formality": "Formal",
+    "season": [
+      "Summer"
+    ],
+    "price": 3999,
+    "available_sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "stock_quantity": 0,
+    "temp_min_c": 18.0,
+    "temp_max_c": 32.0
+  },
+  {
+    "id": 25,
+    "product_id": "MODA-0025",
+    "name": "Classic UV Polarized Sunglasses",
+    "image": "/uploads/sunglasses.png",
+    "category": "Accessory",
+    "subcategory": "Sunglasses",
+    "color": "Black",
+    "pattern": "Solid",
+    "formality": "Casual",
+    "season": [
+      "Summer",
+      "All Season"
+    ],
+    "price": 899,
+    "available_sizes": [
+      "One Size"
+    ],
+    "stock_quantity": 15,
+    "temp_min_c": 15.0,
+    "temp_max_c": 40.0
+  },
+  {
+    "id": 26,
+    "product_id": "MODA-0026",
+    "name": "Navy Linen Summer Blazer",
+    "image": "/uploads/image-1783182707205-392757678_original.png",
+    "category": "Outerwear",
+    "subcategory": "Blazer",
+    "color": "Navy",
+    "pattern": "Solid",
+    "formality": "Smart Casual",
+    "season": [
+      "Summer",
+      "All Season"
+    ],
+    "price": 3999,
+    "available_sizes": [
+      "M",
+      "L"
+    ],
+    "stock_quantity": 0,
+    "temp_min_c": 18.0,
+    "temp_max_c": 32.0
+  },
+  {
+    "id": 27,
+    "product_id": "MODA-0027",
+    "name": "Emerald Silk Pleated Midi Skirt",
+    "image": "/uploads/image-1783318731393-226207526_original.png",
+    "category": "Bottom",
+    "subcategory": "Skirt",
+    "color": "Emerald Green",
+    "pattern": "Solid",
+    "formality": "Smart Casual",
+    "season": [
+      "Spring",
+      "Summer"
+    ],
+    "price": 2199,
+    "available_sizes": [
+      "S",
+      "M"
+    ],
+    "stock_quantity": 0,
+    "temp_min_c": 18.0,
+    "temp_max_c": 32.0
+  },
+  {
+    "id": 97,
+    "product_id": "MODA-9471",
+    "name": "Purple Geometric Other",
+    "image": "/uploads/prod_1790328094125_Screenshot_2026-09-25_145116.png",
+    "img": "/uploads/prod_1790328094125_Screenshot_2026-09-25_145116.png",
+    "category": "Top",
+    "subcategory": "Other",
+    "color": "Purple",
+    "pattern": "Geometric",
+    "formality": "Casual",
+    "season": [
+      "Summer"
+    ],
+    "price": 899.0,
+    "available_sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "stock_quantity": 9,
+    "temp_min_c": 18.0,
+    "temp_max_c": 38.0
+  }
+]

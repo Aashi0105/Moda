@@ -12,7 +12,7 @@ from agents.wardrobe_agent import run_wardrobe_agent
 from agents.stylist_agent import run_stylist_agent
 
 
-class AgentState(TypedDict):
+class AgentState(TypedDict, total=False):
     """Shared state object passed between agents in the LangGraph graph."""
     user_prompt: str
     next_agent: str
@@ -20,6 +20,9 @@ class AgentState(TypedDict):
     wardrobe_items: List[Dict[str, Any]]
     execution_trace: List[str]
     final_response: str
+    outfit_options: List[Dict[str, Any]]
+    inventory_notice: bool
+    customer_message: str
 
 
 def supervisor_node(state: AgentState) -> Dict[str, Any]:
@@ -92,6 +95,9 @@ def stylist_agent_node(state: AgentState) -> Dict[str, Any]:
     trace.append("Stylist Agent Executed")
     return {
         "final_response": res.get("agent_response", ""),
+        "outfit_options": res.get("outfit_options", []),
+        "inventory_notice": res.get("inventory_notice", False),
+        "customer_message": res.get("customer_message", ""),
         "execution_trace": trace
     }
 

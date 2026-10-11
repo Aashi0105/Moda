@@ -38,6 +38,11 @@ app.use(bodyParser.json());
 // Serve root static html/css/js files (index.html, studio.html, closet.html, etc.)
 app.use(express.static(__dirname));
 
+// Route for staff portal without .html extension
+app.get('/staff', (req, res) => {
+    res.sendFile(path.join(__dirname, 'staff.html'));
+});
+
 // Serve static uploaded assets
 
 const uploadsDir = path.join(__dirname, 'public', 'uploads');
@@ -3980,10 +3985,15 @@ app.all(['/recommend', '/api/recommend', '/api/recommendations'], async (req, re
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 20000);
 
+        const reqPayload = req.body && Object.keys(req.body).length > 0 ? req.body : { prompt: userPrompt };
+        if (!reqPayload.prompt && userPrompt) {
+            reqPayload.prompt = userPrompt;
+        }
+
         const response = await fetch(pyUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: userPrompt }),
+            body: JSON.stringify(reqPayload),
             signal: controller.signal
         });
         clearTimeout(timeoutId);
@@ -4013,12 +4023,18 @@ app.all(['/recommend', '/api/recommend', '/api/recommendations'], async (req, re
         else if (shoesObj && !shoesObj.id) shoesObj.id = 'shoes-1';
 
         return res.json({
+            ...data,
             success: true,
             prompt: userPrompt,
             top: topObj,
             bottom: bottomObj,
             outerwear: outerwearObj,
             shoes: shoesObj,
+            outfit_options: data.outfit_options || [],
+            total_options: data.total_options || (data.outfit_options ? data.outfit_options.length : 0),
+            inventory_notice: data.inventory_notice || false,
+            partial_inventory: data.partial_inventory || false,
+            customer_message: data.customer_message || "",
             weather: data.weather || { city: "Vadodara", temperature: 26.2, condition: "Clear" },
             recommended_outfit: data.recommended_outfit || {},
             explanation: data.full_recommendation || "Curated by LangGraph Multi-Agent Stylist.",
@@ -4052,6 +4068,27 @@ app.all(['/recommend', '/api/recommend', '/api/recommendations'], async (req, re
 });
 
 
+
+// Staff Cataloging Proxy Route (Forwards to Python backend on port 5000)
+app.all(['/api/staff/*', '/api/staff'], async (req, res) => {
+    const langgraphPort = process.env.LANGGRAPH_PORT || 5000;
+    const targetUrl = `http://127.0.0.1:${langgraphPort}${req.originalUrl}`;
+    try {
+        const fetchOpts = {
+            method: req.method,
+            headers: { 'Content-Type': 'application/json' },
+        };
+        if (req.method !== 'GET' && req.method !== 'HEAD' && req.body) {
+            fetchOpts.body = JSON.stringify(req.body);
+        }
+        const pyRes = await fetch(targetUrl, fetchOpts);
+        const data = await pyRes.json();
+        return res.status(pyRes.status).json(data);
+    } catch (err) {
+        console.error('[Express -> Staff API Error]:', err.message);
+        return res.status(502).json({ success: false, error: 'Staff Catalog backend offline or unreachable: ' + err.message });
+    }
+});
 
 // Start Server
 app.listen(PORT, () => {

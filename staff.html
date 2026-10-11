@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Moda Staff Cataloging — Image Tagger & Product Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c0d12;
+      --card-bg: #14161f;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.25);
+      --accent-hover: #4f46e5;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --input-bg: #1e2230;
+      --input-border: rgba(255, 255, 255, 0.12);
+      --radius: 14px;
+      --shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .badge-staff {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .tagline {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Grid Layout */
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .catalog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Upload Zone */
+    .upload-zone {
+      border: 2px dashed var(--input-border);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.02);
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--accent);
+      background: rgba(99, 102, 241, 0.06);
+    }
+
+    .upload-icon {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .upload-hint {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Image Preview */
+    .preview-container {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #000;
+      margin-bottom: 18px;
+      border: 1px solid var(--card-border);
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-container img {
+      width: 100%;
+      height: 320px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .image-quality-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .quality-good {
+      background: rgba(16, 185, 129, 0.85);
+      color: #fff;
+    }
+
+    .quality-poor {
+      background: rgba(239, 68, 68, 0.85);
+      color: #fff;
+    }
+
+    /* Sample Images Bar */
+    .sample-bar {
+      margin-top: 14px;
+    }
+
+    .sample-title {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sample-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .sample-chip {
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .sample-chip:hover {
+      color: #fff;
+      border-color: var(--accent);
+      background: rgba(99, 102, 241, 0.15);
+    }
+
+    /* Form Elements */
+    .form-section-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-top: 20px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .confidence-tag {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-dim);
+    }
+
+    .confidence-tag.high {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .confidence-tag.review {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .needs-review-input {
+      border-color: var(--warning) !important;
+      background: rgba(245, 158, 11, 0.05) !important;
+    }
+
+    /* Size Buttons */
+    .size-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .size-checkbox-label {
+      cursor: pointer;
+    }
+
+    .size-checkbox-label input {
+      display: none;
+    }
+
+    .size-pill {
+      display: inline-block;
+      padding: 8px 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .size-checkbox-label input:checked + .size-pill {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* Season Badges */
+    .season-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .season-checkbox-label input {
+      display: none;
+    }
+
+    .season-pill {
+      display: inline-block;
+      padding: 7px 12px;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .season-checkbox-label input:checked + .season-pill {
+      background: rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+      border-color: var(--accent);
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, #4338ca 100%);
+      color: #fff;
+      box-shadow: 0 4px 15px var(--accent-glow);
+      width: 100%;
+      margin-top: 24px;
+      font-size: 15px;
+      padding: 14px;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Status Notifications */
+    .alert {
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .alert-success {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+    }
+
+    .alert-danger {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #f87171;
+    }
+
+    .alert-warning {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fbbf24;
+    }
+
+    /* Inventory Table */
+    .inventory-section {
+      margin-top: 36px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      margin-top: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px 16px;
+      font-weight: 600;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .td-name {
+      color: #fff;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .prod-thumb {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .stock-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .stock-in {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+    }
+
+    .stock-out {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+    }
+
+    /* Spinner */
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="brand">
+      <div class="brand-logo">Moda</div>
+      <span class="badge-staff">Staff Cataloging</span>
+    </div>
+    <div class="tagline">Phase 3 — Review, Correct & Confirm AI Tagged Garments into Shop Inventory</div>
+  </header>
+
+  <!-- Notification Banner -->
+  <div id="statusAlert" class="alert"></div>
+
+  <div class="catalog-grid">
+    <!-- Left Column: Image Upload & Preview -->
+    <div>
+      <div class="card">
+        <div class="card-title">
+          <span>1. Product Garment Image</span>
+          <span id="aiStatusBadge" class="confidence-tag">Ready</span>
+        </div>
+
+        <!-- Drag & Drop Zone -->
+        <div class="upload-zone" id="dropZone">
+          <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" style="display:none;">
+          <div class="upload-icon">📸</div>
+          <div style="font-weight:600;">Tap to upload garment photo</div>
+          <div class="upload-hint">Supports JPG, PNG, WEBP from tablet camera or file</div>
+        </div>
+
+        <!-- Image Preview Card -->
+        <div class="preview-container" id="previewWrapper">
+          <div id="noImagePlaceholder" style="color:var(--text-dim); font-size:13px; text-align:center;">
+            Garment preview will appear here
+          </div>
+          <img id="previewImg" src="" alt="Garment Preview" style="display:none;">
+          <span id="qualityBadge" class="image-quality-badge quality-good" style="display:none;">Good Quality</span>
+        </div>
+
+        <!-- Quick Test Image Chips for Immediate Tablet Testing -->
+        <div class="sample-bar">
+          <div class="sample-title">Or choose sample test garment:</div>
+          <div class="sample-chips">
+            <span class="sample-chip" onclick="loadSampleImage('blue_shirt.jpeg')">👔 Blue Shirt</span>
+            <span class="sample-chip" onclick="loadSampleImage('blue_jeans.png')">👖 Blue Jeans</span>
+            <span class="sample-chip" onclick="loadSampleImage('red_dress.png')">👗 Red Dress</span>
+            <span class="sample-chip" onclick="loadSampleImage('beige_sneakers.png')">👟 Sneakers</span>
+            <span class="sample-chip" onclick="loadSampleImage('striped_shirt.png')">👕 Striped Shirt</span>
+            <span class="sample-chip" onclick="loadSampleImage('sunglasses.png')">🕶️ Sunglasses</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: AI Suggestions & Staff Review Form -->
+    <div>
+      <div class="card">
+        <div class="card-title">
+          <span>2. AI Suggested Tags & Commercial Details</span>
+          <span id="reviewHintBadge" class="confidence-tag review" style="display:none;">⚠️ Needs Staff Review</span>
+        </div>
+
+        <form id="productForm" onsubmit="handleConfirmProduct(event)">
+          <!-- Commercial Information Section -->
+          <div class="form-section-title">📦 Commercial Inventory Details</div>
+
+          <div class="form-grid">
+            <div class="form-group full">
+              <label for="prodName">Product Name *</label>
+              <input type="text" id="prodName" placeholder="e.g. Classic Blue Striped Cotton Shirt" required>
+            </div>
+
+            <div class="form-group">
+              <label for="prodId">Product ID / SKU * <span style="font-size:11px; color:var(--text-dim);">Must be unique</span></label>
+              <input type="text" id="prodId" placeholder="e.g. MODA-TEST-001" required>
+            </div>
+
+            <div class="form-group">
+              <label for="prodPrice">Retail Price (₹) *</label>
+              <input type="number" id="prodPrice" min="0" step="1" placeholder="1299" required>
+            </div>
+
+            <div class="form-group">
+              <label for="prodStock">Initial Stock Quantity *</label>
+              <input type="number" id="prodStock" min="0" step="1" placeholder="5" required>
+            </div>
+
+            <div class="form-group">
+              <label>Available Sizes *</label>
+              <div class="size-chips" id="sizesGroup">
+                <label class="size-checkbox-label"><input type="checkbox" name="sizes" value="XS"><span class="size-pill">XS</span></label>
+                <label class="size-checkbox-label"><input type="checkbox" name="sizes" value="S" checked><span class="size-pill">S</span></label>
+                <label class="size-checkbox-label"><input type="checkbox" name="sizes" value="M" checked><span class="size-pill">M</span></label>
+                <label class="size-checkbox-label"><input type="checkbox" name="sizes" value="L" checked><span class="size-pill">L</span></label>
+                <label class="size-checkbox-label"><input type="checkbox" name="sizes" value="XL"><span class="size-pill">XL</span></label>
+                <label class="size-checkbox-label"><input type="checkbox" name="sizes" value="One Size"><span class="size-pill">One Size</span></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Taxonomy Review Section -->
+          <div class="form-section-title" style="margin-top:24px;">🏷️ Garment Taxonomy (AI Suggested — Editable)</div>
+
+          <div class="form-grid">
+            <!-- Category -->
+            <div class="form-group">
+              <label for="catSelect">
+                Category *
+                <span id="confCategory" class="confidence-tag">AI: -</span>
+              </label>
+              <select id="catSelect" onchange="onCategoryChanged()" required>
+                <option value="">Select Category...</option>
+              </select>
+            </div>
+
+            <!-- Subcategory -->
+            <div class="form-group">
+              <label for="subcatSelect">
+                Subcategory *
+                <span id="confSubcategory" class="confidence-tag">AI: -</span>
+              </label>
+              <select id="subcatSelect" required>
+                <option value="">Select Subcategory...</option>
+              </select>
+            </div>
+
+            <!-- Color -->
+            <div class="form-group">
+              <label for="colorSelect">
+                Dominant Color *
+                <span id="confColor" class="confidence-tag">AI: -</span>
+              </label>
+              <select id="colorSelect" required>
+                <option value="">Select Color...</option>
+              </select>
+            </div>
+
+            <!-- Pattern -->
+            <div class="form-group">
+              <label for="patternSelect">
+                Pattern *
+                <span id="confPattern" class="confidence-tag">AI: -</span>
+              </label>
+              <select id="patternSelect" required>
+                <option value="">Select Pattern...</option>
+              </select>
+            </div>
+
+            <!-- Formality -->
+            <div class="form-group">
+              <label for="formalitySelect">
+                Occasion Formality *
+                <span id="confFormality" class="confidence-tag">AI: -</span>
+              </label>
+              <select id="formalitySelect" required>
+                <option value="">Select Formality...</option>
+              </select>
+            </div>
+
+            <!-- Seasonality -->
+            <div class="form-group">
+              <label>
+                Season Compatibility *
+                <span id="confSeason" class="confidence-tag">AI: -</span>
+              </label>
+              <div class="season-chips" id="seasonsGroup">
+                <label class="season-checkbox-label"><input type="checkbox" name="seasons" value="Summer"><span class="season-pill">Summer</span></label>
+                <label class="season-checkbox-label"><input type="checkbox" name="seasons" value="Winter"><span class="season-pill">Winter</span></label>
+                <label class="season-checkbox-label"><input type="checkbox" name="seasons" value="Monsoon/Rainy"><span class="season-pill">Monsoon</span></label>
+                <label class="season-checkbox-label"><input type="checkbox" name="seasons" value="All Season" checked><span class="season-pill">All Season</span></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="saveBtn" class="btn btn-primary">
+            <span>✅ Confirm & Save Product to Shop Inventory</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real-time Shop Inventory List -->
+  <div class="inventory-section">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <h3 style="font-size:18px; font-weight:600;">Current Shop Inventory (<span id="totalProductsCount">0</span> products)</h3>
+      <button class="sample-chip" onclick="loadCurrentInventory()">🔄 Refresh Inventory</button>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>SKU</th>
+            <th>Category / Subcategory</th>
+            <th>Formality</th>
+            <th>Color</th>
+            <th>Price</th>
+            <th>Stock</th>
+          </tr>
+        </thead>
+        <tbody id="inventoryTableBody">
+          <tr><td colspan="7" style="text-align:center; padding:24px;">Loading inventory...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  // State
+  let taxonomyData = null;
+  let currentImagePath = "";
+  let currentImageUrl = "";
+
+  // Initialization
+  document.addEventListener("DOMContentLoaded", async () => {
+    setupUploadHandlers();
+    await loadTaxonomy();
+    await loadCurrentInventory();
+  });
+
+  // Load fixed taxonomy from API
+  async function loadTaxonomy() {
+    try {
+      const res = await fetch('/api/staff/taxonomy');
+      const data = await res.json();
+      if (data.success && data.taxonomy) {
+        taxonomyData = data.taxonomy;
+        populateDropdowns();
+      }
+    } catch(err) {
+      showAlert("danger", "Failed to load taxonomy metadata: " + err.message);
+    }
+  }
+
+  function populateDropdowns() {
+    if (!taxonomyData) return;
+
+    // Categories
+    const catSelect = document.getElementById("catSelect");
+    catSelect.innerHTML = '<option value="">Select Category...</option>';
+    taxonomyData.categories.forEach(c => {
+      catSelect.innerHTML += `<option value="${c}">${c}</option>`;
+    });
+
+    // Colors
+    const colorSelect = document.getElementById("colorSelect");
+    colorSelect.innerHTML = '<option value="">Select Color...</option>';
+    taxonomyData.colors.forEach(c => {
+      colorSelect.innerHTML += `<option value="${c}">${c}</option>`;
+    });
+
+    // Patterns
+    const patternSelect = document.getElementById("patternSelect");
+    patternSelect.innerHTML = '<option value="">Select Pattern...</option>';
+    taxonomyData.patterns.forEach(p => {
+      patternSelect.innerHTML += `<option value="${p}">${p}</option>`;
+    });
+
+    // Formalities
+    const formSelect = document.getElementById("formalitySelect");
+    formSelect.innerHTML = '<option value="">Select Formality...</option>';
+    taxonomyData.formalities.forEach(f => {
+      formSelect.innerHTML += `<option value="${f}">${f}</option>`;
+    });
+  }
+
+  function onCategoryChanged() {
+    const cat = document.getElementById("catSelect").value;
+    const subSelect = document.getElementById("subcatSelect");
+    subSelect.innerHTML = '<option value="">Select Subcategory...</option>';
+
+    if (cat && taxonomyData && taxonomyData.subcategories[cat]) {
+      taxonomyData.subcategories[cat].forEach(s => {
+        subSelect.innerHTML += `<option value="${s}">${s}</option>`;
+      });
+    }
+  }
+
+  // File Upload Handling
+  function setupUploadHandlers() {
+    const dropZone = document.getElementById("dropZone");
+    const fileInput = document.getElementById("fileInput");
+
+    dropZone.addEventListener("click", () => fileInput.click());
+
+    dropZone.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropZone.classList.add("dragover");
+    });
+
+    dropZone.addEventListener("dragleave", () => {
+      dropZone.classList.remove("dragover");
+    });
+
+    dropZone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dropZone.classList.remove("dragover");
+      if (e.dataTransfer.files.length) {
+        handleFileUpload(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput.addEventListener("change", (e) => {
+      if (e.target.files.length) {
+        handleFileUpload(e.target.files[0]);
+      }
+    });
+  }
+
+  async function handleFileUpload(file) {
+    showAlert("warning", "Uploading garment and analyzing with Gemini Vision...");
+    setAiStatus("Analyzing...", true);
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const base64Data = e.target.result;
+      const cleanFileName = `prod_${Date.now()}_${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+
+      try {
+        const uploadRes = await fetch('/api/staff/upload-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            filename: cleanFileName,
+            image_base64: base64Data
+          })
+        });
+        const uploadData = await uploadRes.json();
+        if (!uploadData.success) throw new Error(uploadData.error || "Upload failed");
+
+        currentImagePath = uploadData.image_path;
+        currentImageUrl = uploadData.image_url;
+        showPreview(currentImageUrl);
+
+        // Run Item Tagger
+        await runAiTagger(currentImagePath);
+      } catch(err) {
+        showAlert("danger", "Image processing failed: " + err.message);
+        setAiStatus("Error", false);
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // Sample Image Trigger
+  async function loadSampleImage(filename) {
+    showAlert("warning", `Loading sample ${filename} and running Item Tagger...`);
+    setAiStatus("Analyzing...", true);
+
+    currentImagePath = `test_images/${filename}`;
+    currentImageUrl = `/uploads/${filename}`;
+    showPreview(currentImageUrl);
+
+    await runAiTagger(currentImagePath);
+  }
+
+  function showPreview(url) {
+    const previewImg = document.getElementById("previewImg");
+    const placeholder = document.getElementById("noImagePlaceholder");
+    previewImg.src = url;
+    previewImg.style.display = "block";
+    placeholder.style.display = "none";
+  }
+
+  // Call backend to execute tools/item_tagger.py
+  async function runAiTagger(imgPath) {
+    try {
+      const res = await fetch('/api/staff/tag-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image_path: imgPath })
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error || "Tagging failed");
+
+      const result = data.data;
+      displayAiSuggestions(result);
+      showAlert("success", "AI garment tags extracted! Please review and fill in commercial details below.");
+      setAiStatus("Completed", false);
+    } catch(err) {
+      showAlert("danger", "Tagger execution error: " + err.message);
+      setAiStatus("Failed", false);
+    }
+  }
+
+  function displayAiSuggestions(result) {
+    const tags = result.suggested_tags;
+
+    // Quality badge
+    const qBadge = document.getElementById("qualityBadge");
+    qBadge.textContent = `${result.image_quality || 'Good'} Quality`;
+    qBadge.className = `image-quality-badge quality-${(result.image_quality || 'good').toLowerCase()}`;
+    qBadge.style.display = "block";
+
+    let hasUncertainFields = false;
+
+    // Helper for confidence badge
+    function setBadge(elementId, info) {
+      const el = document.getElementById(elementId);
+      if (!info || info.value === null) {
+        el.textContent = "AI: null (review required)";
+        el.className = "confidence-tag review";
+        hasUncertainFields = true;
+      } else {
+        const pct = Math.round((info.confidence || 0) * 100);
+        el.textContent = `AI: ${pct}%`;
+        el.className = `confidence-tag ${pct >= 75 ? 'high' : 'review'}`;
+      }
+    }
+
+    setBadge("confCategory", tags.category);
+    setBadge("confSubcategory", tags.subcategory);
+    setBadge("confColor", tags.color);
+    setBadge("confPattern", tags.pattern);
+    setBadge("confFormality", tags.formality);
+    setBadge("confSeason", tags.season);
+
+    // Populate Category
+    if (tags.category && tags.category.value) {
+      document.getElementById("catSelect").value = tags.category.value;
+      onCategoryChanged();
+    }
+    // Populate Subcategory
+    if (tags.subcategory && tags.subcategory.value) {
+      setTimeout(() => {
+        document.getElementById("subcatSelect").value = tags.subcategory.value;
+      }, 50);
+    }
+    // Populate Color
+    if (tags.color && tags.color.value) {
+      document.getElementById("colorSelect").value = tags.color.value;
+    }
+    // Populate Pattern
+    if (tags.pattern && tags.pattern.value) {
+      document.getElementById("patternSelect").value = tags.pattern.value;
+    }
+    // Populate Formality
+    if (tags.formality && tags.formality.value) {
+      document.getElementById("formalitySelect").value = tags.formality.value;
+    }
+    // Populate Seasons
+    if (tags.season && tags.season.value) {
+      const valSeasons = Array.isArray(tags.season.value) ? tags.season.value : [tags.season.value];
+      document.querySelectorAll("input[name='seasons']").forEach(cb => {
+        cb.checked = valSeasons.includes(cb.value);
+      });
+    }
+
+    // Mark review hint badge
+    const reviewBadge = document.getElementById("reviewHintBadge");
+    reviewBadge.style.display = hasUncertainFields ? "inline-block" : "none";
+
+    // Auto-generate suggested Product Name and SKU if empty
+    if (!document.getElementById("prodName").value) {
+      const color = tags.color ? tags.color.value || "" : "";
+      const pattern = tags.pattern && tags.pattern.value && tags.pattern.value !== "Solid" ? tags.pattern.value : "";
+      const sub = tags.subcategory ? tags.subcategory.value || "" : "";
+      document.getElementById("prodName").value = `${color} ${pattern} ${sub}`.replace(/\s+/g, ' ').trim() || "New Product Garment";
+    }
+
+    if (!document.getElementById("prodId").value) {
+      const randomId = Math.floor(1000 + Math.random() * 9000);
+      document.getElementById("prodId").value = `MODA-${randomId}`;
+    }
+  }
+
+  // Handle Form Submission: Confirm & Save Product
+  async function handleConfirmProduct(event) {
+    event.preventDefault();
+
+    const saveBtn = document.getElementById("saveBtn");
+    saveBtn.disabled = true;
+    saveBtn.innerHTML = '<span class="spinner"></span> Saving Product...';
+
+    // Collect Sizes
+    const selectedSizes = Array.from(document.querySelectorAll("input[name='sizes']:checked")).map(cb => cb.value);
+    // Collect Seasons
+    const selectedSeasons = Array.from(document.querySelectorAll("input[name='seasons']:checked")).map(cb => cb.value);
+
+    const payload = {
+      name: document.getElementById("prodName").value.trim(),
+      product_id: document.getElementById("prodId").value.trim(),
+      price: parseFloat(document.getElementById("prodPrice").value),
+      stock_quantity: parseInt(document.getElementById("prodStock").value, 10),
+      available_sizes: selectedSizes,
+      category: document.getElementById("catSelect").value,
+      subcategory: document.getElementById("subcatSelect").value,
+      color: document.getElementById("colorSelect").value,
+      pattern: document.getElementById("patternSelect").value,
+      formality: document.getElementById("formalitySelect").value,
+      season: selectedSeasons,
+      image: currentImageUrl || `/uploads/${document.getElementById("prodId").value.toLowerCase()}.jpg`
+    };
+
+    try {
+      const res = await fetch('/api/staff/save-product', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Save rejected by server validation");
+      }
+
+      showAlert("success", `🎉 Product Confirmed & Saved: ${data.product.name} (${data.product.product_id}) | Stock: ${data.product.stock_quantity} | ₹${data.product.price}`);
+      await loadCurrentInventory();
+      // Scroll to inventory section to show item added
+      document.querySelector(".inventory-section").scrollIntoView({ behavior: 'smooth' });
+    } catch(err) {
+      showAlert("danger", "Validation Error: " + err.message);
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.innerHTML = '<span>✅ Confirm & Save Product to Shop Inventory</span>';
+    }
+  }
+
+  // Load Inventory Table
+  async function loadCurrentInventory() {
+    try {
+      const res = await fetch('/api/staff/products');
+      const data = await res.json();
+      if (data.success && data.products) {
+        const tbody = document.getElementById("inventoryTableBody");
+        document.getElementById("totalProductsCount").textContent = data.products.length;
+
+        if (data.products.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No products in inventory yet.</td></tr>';
+          return;
+        }
+
+        // Render most recent first
+        const sorted = [...data.products].reverse();
+        tbody.innerHTML = sorted.map(p => `
+          <tr>
+            <td class="td-name">
+              <img class="prod-thumb" src="${p.image || p.img || '/uploads/blue_shirt.jpeg'}" onerror="this.src='/uploads/blue_shirt.jpeg'">
+              <span>${p.name}</span>
+            </td>
+            <td><code>${p.product_id}</code></td>
+            <td>${p.category} / ${p.subcategory || '-'}</td>
+            <td>${p.formality}</td>
+            <td>${p.color}</td>
+            <td style="font-weight:600; color:#fff;">₹${p.price.toLocaleString()}</td>
+            <td>
+              <span class="stock-badge ${p.stock_quantity > 0 ? 'stock-in' : 'stock-out'}">
+                ${p.stock_quantity > 0 ? `In Stock (${p.stock_quantity})` : 'Out of Stock (0)'}
+              </span>
+            </td>
+          </tr>
+        `).join('');
+      }
+    } catch(e) {
+      console.warn("Failed to load inventory table:", e);
+    }
+  }
+
+  function setAiStatus(text, isLoading) {
+    const b = document.getElementById("aiStatusBadge");
+    b.textContent = text;
+    b.className = `confidence-tag ${isLoading ? 'review' : 'high'}`;
+  }
+
+  function showAlert(type, message) {
+    const alert = document.getElementById("statusAlert");
+    alert.className = `alert alert-${type}`;
+    alert.textContent = message;
+    alert.style.display = "block";
+  }
+</script>
+
+</body>
+</html>
