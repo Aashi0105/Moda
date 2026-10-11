@@ -1,8 +1,9 @@
 # Moda
 
-> An AI-powered digital wardrobe and multi-agent styling platform that curates cohesive, weather-appropriate outfits strictly from clothes you actually own.
+> **Status: In Development**  
+> An AI-powered styling assistant and shop-focused version of ThreadTheory that curates cohesive, weather-appropriate outfits strictly from a shop's real inventory.
 
-Moda addresses the everyday problem of "a closet full of clothes, but nothing to wear." While standard LLM chatbots often invent or hallucinate non-existent garments, Moda grounds every suggestion in a personal digital wardrobe database. 
+Moda is the shop-focused version of ThreadTheory, designed as an AI styling assistant that recommends complete outfits strictly from a shop's real in-stock inventory. Rather than hallucinating non-existent garments, Moda grounds every suggestion in verified items from the store's database (`wardrobe.db`), taking into account live weather, occasions, and stock availability.
 
 The core intelligence is powered by a **LangGraph multi-agent architecture** running on Python with **Google Gemini** and **Open-Meteo REST APIs**, bridged seamlessly to a responsive **Node.js/Express** editorial web application.
 
@@ -10,17 +11,15 @@ The core intelligence is powered by a **LangGraph multi-agent architecture** run
 
 ## ✨ Features
 
-* **Multi-Agent Outfit Curation**: LangGraph state machine orchestrates specialized agents to deliver structured outfit recommendations with transparent reasoning traces.
-* **Hallucination-Free Grounding**: Outfit selections are strictly constrained to items verified in the user's SQLite wardrobe inventory (`wardrobe.db`).
-* **Real-Time Weather Intelligence**: Live atmospheric metrics (temperature, precipitation probability, wind speed) dynamically filter suitable garment layers.
-* **Stylist Rationale**: Clear explanations detailing why specific pieces, colors, and layers were combined for the requested occasion and forecast.
-* **Digital Closet Management**: Organize, tag, and filter personal garments by category, subcategory, color, formality, and temperature comfort range.
-* **Interactive Outfit Studio**: Visual canvas to preview outfit coordinates, swap individual pieces, and review agent execution steps.
-* **Multi-Dimensional Inspiration Lookbook**: Curated editorial lookbooks across color stories, color combinations, and fashion aesthetics with intelligent "Build This Look" matching.
-* **Wardrobe Gap Analysis**: Automatically identifies missing wardrobe pieces when comparing personal inventory against inspiration boards.
-* **Outfit Calendar & Planner**: Schedule and plan daily outfits in advance on an interactive monthly and weekly calendar.
-* **"My Looks" Saved Outfits**: Visual scrapbook to save, revisit, or directly load favorite outfits back into the Studio or Calendar.
-* **Style DNA Diagnostic**: Interactive quiz analyzing individual aesthetic archetypes, color palettes, and fit preferences.
+* **Multi-Agent Architecture**: LangGraph supervisor coordinates specialized worker agents (Weather, Wardrobe, Stylist) to deliver structured styling results with transparent execution traces.
+* **In-Store Personal Shopper**: Interactive styling assistant generating up to 3 distinct outfit options (*One-Piece Dress*, *Classic Separates*, *Layered Statement*) based on occasions and categories.
+* **Inventory-Grounded Recommendations**: Outfit recommendations are strictly constrained to verified items in the shop's SQLite database (`wardrobe.db`), displaying inventory limitation notices instead of hallucinating when stock cannot support a request.
+* **Dynamic Bundle Pricing & Stock Transparency**: Calculates deterministic outfit bundle totals in rupees, displaying individual item prices, available sizes, and remaining stock counts.
+* **Zero-Stock Exclusion**: Products with zero stock are automatically excluded from customer styling recommendations.
+* **Staff Catalog Portal (`/staff`)**: Dedicated staff workspace for cataloging inventory with drag-and-drop garment photo upload, live inventory tables, and stock monitoring.
+* **Gemini Vision Tagging with Needs Review Flags**: Auto-tags category, subcategory, color, pattern, formality, and season with confidence scores, automatically flagging attributes under 70% confidence for staff review.
+* **Staff Override & Catalog Validation**: Staff edits always supersede AI suggestions, with strict server-side validation enforcing SKU uniqueness (`MODA-xxxx`), positive pricing, category-subcategory compatibility, and size availability.
+* **Real-Time Weather Intelligence**: Live atmospheric conditions (temperature, precipitation chance, conditions) fetched automatically for the store location via the Open-Meteo REST API.
 
 ---
 
@@ -50,20 +49,20 @@ flowchart TD
 | :--- | :--- | :--- |
 | **Supervisor Agent** | Inspects the shared `AgentState` dictionary and dynamically determines the next transition step until reaching `FINISH`. | State conditional routing |
 | **Weather Agent** | Extracts city location and retrieves real-time weather metrics (temperature, precipitation chance, conditions). | Open-Meteo REST API (`tools/weather.py`) |
-| **Wardrobe Agent** | Queries and filters the user's closet inventory matching formality, category, and temperature boundaries. | SQLite database query tool (`tools/wardrobe.py`) |
+| **Wardrobe Agent** | Queries and filters the shop's inventory matching formality, category, and temperature boundaries. | SQLite database query tool (`tools/wardrobe.py`) |
 | **Stylist Agent** | Reasons over user intent, live weather constraints, and available items to compose a cohesive outfit and rationale. | Google Gemini LLM (`agents/stylist_agent.py`) |
 
 ---
 
 ## 🔄 How It Works
 
-1. **Request Intake**: The user submits a styling prompt (e.g., *"casual coffee meeting, rainy weather"*) via the Outfit Studio.
+1. **Request Intake**: The user submits a styling prompt (e.g., *"casual coffee meeting, rainy weather"*) via the In-Store Stylist on the home page by choosing an occasion and category.
 2. **Supervisor Assessment**: The Supervisor inspects `AgentState` and detects unpopulated weather data, routing execution to the **Weather Agent**.
 3. **Weather Retrieval**: The Weather Agent queries the Open-Meteo REST API for live conditions in the target location (e.g., 26°C, 78% rain probability).
-4. **Inventory Retrieval**: The Supervisor routes to the **Wardrobe Agent**, which queries `wardrobe.db` to retrieve items comfortable within the current temperature range and formality.
-5. **LLM Synthesis**: The Supervisor invokes the **Stylist Agent**. Google Gemini evaluates the clothing items against the weather forecast and user intent, selecting a top, bottom, outerwear layer, shoes, and accessory.
+4. **Inventory Retrieval**: The Supervisor routes to the **Wardrobe Agent**, which queries `wardrobe.db` to retrieve in-stock items comfortable within the current temperature range and formality, filtering out zero-stock items.
+5. **LLM Synthesis**: The Supervisor invokes the **Stylist Agent**. Google Gemini evaluates the in-stock inventory against the weather forecast and customer intent, composing up to three distinct outfit looks (*One-Piece Dress*, *Classic Separates*, *Layered Statement*) or returning an inventory limitation notice if stock cannot support the request.
 6. **Parsing & DB Binding**: The Python backend cleans any Markdown artifacts from the LLM output, verifies item IDs against the database, and returns structured JSON to the Node.js layer.
-7. **Frontend Presentation**: The Studio renders the outfit cards, styling rationale, and the step-by-step agent execution trace.
+7. **Frontend Presentation**: The Stylist screen renders up to three outfit looks with item prices, available sizes, remaining stock and the total bundle price.
 
 ---
 
@@ -72,7 +71,7 @@ flowchart TD
 ```mermaid
 flowchart LR
     subgraph Client [Browser Client]
-        UI[Editorial Web UI<br/>Studio / Closet / Calendar]
+        UI[In-Store Stylist & Staff Portal<br/>Web Interface]
     end
 
     subgraph NodeServer [Node.js / Express Server :3000]
@@ -118,7 +117,7 @@ flowchart LR
 | **AI / Agent Framework** | Python 3.12, LangGraph, LangChain Core |
 | **LLM Models** | Google Gemini (`gemini-2.5-flash` via `langchain-google-genai` and `@google/genai`) |
 | **Databases & Storage** | SQLite (`wardrobe.db`), JSON storage (`data/users.json`, `data/wardrobe.json`, `data/planner.json`, etc.) |
-| **External APIs** | Open-Meteo REST API (Live weather metrics), Pexels API (Lookbook curation) |
+| **External APIs** | Open-Meteo REST API (Live weather metrics) |
 | **Testing** | Pytest, Python `unittest` |
 | **Build & Tooling** | Vite (frontend development), Python virtual environments (`venv`) |
 
@@ -128,11 +127,15 @@ flowchart LR
 
 ```text
 Moda/
+├── docs/                       # Staff user guide and rollout documentation
 ├── agents/                     # LangGraph Agent implementations
 │   ├── stylist_agent.py        # Gemini reasoning agent for outfit synthesis
 │   ├── wardrobe_agent.py       # Inventory filtering agent
 │   └── weather_agent.py        # Open-Meteo weather agent
+├── services/                   # Staff cataloging and inventory services
+│   └── staff_catalog.py        # Commercial validation, AI tagging review, and DB sync
 ├── tools/                      # Tool definitions invoked by agents
+│   ├── item_tagger.py          # Gemini Vision automated clothing photo-tagging tool
 │   ├── wardrobe.py             # SQLite parameterized query interface
 │   └── weather.py              # Open-Meteo geocoding and forecast fetcher
 ├── tests/                      # Automated test suite
@@ -143,17 +146,27 @@ Moda/
 │   ├── test_wardrobe_tool.py   # Database query tool tests
 │   ├── test_weather_agent.py   # Weather agent unit tests
 │   └── test_weather_tool.py    # Open-Meteo REST integration tests
-├── data/                       # Local JSON stores for user profiles, wardrobe, looks
-├── public/                     # Static assets and lookbook resources
+├── data/                       # Local JSON stores for shop inventory (inventory.json, wardrobe.json) and app data
+├── public/                     # Static assets and uploads
 ├── api.py                      # Python HTTP REST API server (Port 5000)
 ├── graph.py                    # LangGraph StateGraph & Supervisor logic
 ├── server.js                   # Node.js/Express web server (Port 3000)
 ├── setup_db.py                 # SQLite wardrobe database initialisation script
+├── staff.html                  # Staff cataloging and product review portal
 ├── test_env.py                 # Environment and dependency verification script
 ├── requirements.txt            # Python dependencies
 ├── package.json                # Node.js dependencies and scripts
 └── .env.example                # Sample environment variables template
 ```
+
+---
+
+## 📚 Documentation
+
+- [User Guide](docs/user-guide.md) — Quick-start job aids and FAQ for shop staff.
+- [Rollout Plan](docs/rollout-plan.md) — Change management and communications plan for retail shop pilots.
+
+Both documents are drafts and have not yet been tested with real users.
 
 ---
 
@@ -200,7 +213,7 @@ npm install
 
 ### 4. Database Setup
 
-Initialize the local SQLite database. This creates `wardrobe.db` seeded with demo wardrobe items:
+Initialize the local SQLite database. This creates `wardrobe.db` seeded with demo shop inventory items:
 
 ```bash
 python setup_db.py
@@ -221,7 +234,6 @@ Open `.env` and set your Google Gemini API key:
 GEMINI_API_KEY=your_gemini_api_key_here
 GOOGLE_API_KEY=your_gemini_api_key_here
 ```
-*(Pexels, Unsplash, and Remove.bg keys are optional for extended lookbook and image features).*
 
 ### 6. Verify Environment
 
@@ -264,24 +276,30 @@ python -m pytest tests/
 ### Verified Test Suite Result
 
 ```text
-tests/test_api.py ................. Passed
-tests/test_app.py ................. Passed
-tests/test_graph.py ............... Passed
-tests/test_stylist_agent.py ....... Passed
-tests/test_wardrobe_agent.py ...... Passed
-tests/test_wardrobe_tool.py ....... Passed
-tests/test_weather_agent.py ....... Passed
-tests/test_weather_tool.py ........ Passed
+tests/test_api.py ..                                                     [  2%]
+tests/test_app.py .                                                      [  3%]
+tests/test_customer_experience.py ..........                             [ 14%]
+tests/test_graph.py .                                                    [ 16%]
+tests/test_item_tagger.py .................                              [ 35%]
+tests/test_personal_shopper.py ......................                    [ 60%]
+tests/test_shop_inventory.py .............                               [ 75%]
+tests/test_staff_review.py ..........                                    [ 87%]
+tests/test_stylist_agent.py .                                            [ 88%]
+tests/test_wardrobe_agent.py ....                                        [ 93%]
+tests/test_wardrobe_tool.py ...                                          [ 96%]
+tests/test_weather_agent.py .                                            [ 97%]
+tests/test_weather_tool.py ..                                            [100%]
 
-======================= 15 passed in 19.60s =======================
+============================= 87 passed in 29.75s =============================
 ```
 
 ### Test Coverage Highlights
 
-* **Tools**: Parameterized SQL queries, category/formality filtering, Open-Meteo HTTP responses.
-* **Agents**: Isolated agent tool execution, input validation, handling empty search results.
-* **State Machine**: Full LangGraph supervisor routing through `Weather → Wardrobe → Stylist → FINISH`.
-* **API & Parsing**: Markdown symbol stripping (`*`, `_`, `` ` ``), database ID binding, and HTTP serialization.
+* **Shop Inventory & Grounding**: SKU validation, zero-stock exclusion, product suitability guards, and anti-hallucination constraints (`test_shop_inventory.py`).
+* **Staff Cataloging & Review**: Gemini Vision auto-tagging, confidence scores, Needs Review flags, staff edit overrides, and commercial validation (`test_staff_review.py`, `test_item_tagger.py`).
+* **In-Store Personal Shopper**: 3-look formulas (dress, separates, layered), bundle pricing calculation, weather integration, and customer UI isolation (`test_personal_shopper.py`, `test_customer_experience.py`).
+* **Multi-Agent State Machine**: LangGraph supervisor routing (`Weather → Wardrobe → Stylist → FINISH`) (`test_graph.py`, `test_stylist_agent.py`, `test_wardrobe_agent.py`).
+* **API & Integration**: HTTP REST endpoints, Markdown sanitization, and DB foreign key binding (`test_api.py`, `test_app.py`).
 
 ---
 
@@ -373,7 +391,7 @@ Content-Type: application/json
 
 ## 🧩 Challenges & Engineering Decisions
 
-* **Overcoming LLM Hallucinations**: Prompting an LLM to recommend clothing often leads to fictional garments. We addressed this by implementing parameterized SQL retrieval where only verified garment IDs are provided to the model, ensuring recommendations are 100% wearable.
+* **Overcoming LLM Hallucinations**: Prompting an LLM to recommend clothing often leads to fictional garments. We addressed this by implementing parameterized SQL retrieval where only verified garment IDs are provided to the model, so recommendations only include items from the shop's verified inventory.
 * **Decoupled Architecture**: Rather than maintaining a monolithic Python app, we divided responsibilities between an Express server (specialized in static asset serving, session handling, and file uploads) and a Python microservice (specialized in LangGraph state machines and LLM integrations).
 * **LLM Markdown Sanitization**: Gemini occasionally returned item names wrapped in bold asterisks (e.g. `**Beige Lightweight Windbreaker**`). A sanitization layer was built into `api.py` to strip Markdown artifacts before database lookup, ensuring foreign keys resolve accurately.
 * **Graceful Degradation**: To prevent UI freezes if external APIs experience latency or rate limits, the system features configurable timeouts and rule-based fallback engines.
@@ -382,10 +400,9 @@ Content-Type: application/json
 
 ## 🔮 Future Improvements
 
-* [ ] **Multi-User Wardrobe DBs**: Migrate SQLite to PostgreSQL for multi-tenant wardrobe inventory isolation in production deployments.
-* [ ] **Computer Vision Tagging**: Implement automatic garment categorization, color extraction, and season detection using Gemini Vision on upload.
+* [ ] **Multi-Shop Inventory DBs**: Migrate SQLite to PostgreSQL for multi-tenant shop inventory isolation in production deployments.
 * [ ] **Vector Similarity Search**: Add semantic embeddings (e.g., ChromaDB) for aesthetic style matching beyond categorical queries.
-* [ ] **Calendar Export**: Enable iCal / Google Calendar sync for scheduled outfits.
+* [ ] **Point-of-Sale (POS) Integration**: Synchronize inventory stock counts directly with in-store barcode scanners and registers.
 
 ---
 
