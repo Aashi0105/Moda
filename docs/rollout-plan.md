@@ -129,3 +129,30 @@ The plan above follows the five stages of the ADKAR model (Awareness, Desire, Kn
 | Knowledge | To know how to change | User Guide, job aids, FAQ, cataloguing checklist; demo and cataloguing workshop |
 | Ability | To be able to do it in practice | Hands-on cataloguing and styling practice; one-to-one floor support in the first week |
 | Reinforcement | To keep using it | Check-in at T plus 3 days; tips at T plus 2 weeks; results at T plus 4 weeks; adoption metrics and weekly review |
+
+## 13. RACI matrix
+
+R = Responsible (does the work), A = Accountable (owns the outcome, one per activity), C = Consulted, I = Informed.
+
+| Activity | Shop owner | Store manager | Moda champion | Stock staff | Sales staff | System maintainer |
+|---|---|---|---|---|---|---|
+| Announce the change and the reason | A | R | C | I | I | I |
+| Run the demo and Q and A | I | A | R | I | I | C |
+| Catalogue products and review AI tags | I | A | C | R | I | C |
+| Keep stock counts current | I | A | C | R | I | I |
+| Style customers with Moda | I | A | C | I | R | I |
+| First-line user support | I | A | R | I | I | C |
+| Fix bugs and blockers | I | I | C | I | I | A/R |
+| Track adoption metrics and report | I | A | R | I | I | C |
+| Pilot go or no-go decision | A/R | C | C | I | I | C |
+
+## 14. Resistance management
+
+| Likely source of resistance | What it looks like | Planned response |
+|---|---|---|
+| Fear of being replaced | Staff avoid using Moda with customers | Position Moda as an assistant; staff choose what to show; include staff in the demo |
+| Extra workload from cataloguing | Slow progress on adding products | Start with best sellers; use the cataloguing checklist; champion helps in week 1; recognise progress openly |
+| Distrust of AI tags | Staff re-enter everything by hand | Show confidence scores, Needs Review flags and the override option; track how often tags are corrected |
+| Habit of using the spreadsheet | The spreadsheet keeps being updated | Keep it as a backup during the pilot only; agree a retirement date at the T plus 4 weeks review |
+| Unclear benefit | Low weekly use | Share early results and good example looks; owner and manager visibly use Moda |
+
